@@ -42,81 +42,81 @@
       </aside>
       <div class="products">
         <div class="products-container">
-          <div class="product-card">
-            <img src="/public/assets/images/product-1.png" alt="" />
-            <p>Áo Thun</p>
-            <p class="product-card_price">200.000đ</p>
+          <div class="product-card" *ngFor="let product of products">
+            <img [src]="product.imageUrl || '/public/assets/images/product-1.png'" alt="{{ product.name }}" />
+            <p>{{ product.product_name }}</p>
+            <p class="product-card_price">{{ product.price | currency: 'VND' }}</p>
           </div>
-          <div class="product-card">
-            <img src="/public/assets/images/product-1.png" alt="" />
-            <p>Áo Thun</p>
-            <p class="product-card_price">200.000đ</p>
-          </div>
-          <div class="product-card">
-            <img src="/public/assets/images/product-1.png" alt="" />
-            <p>Áo Thun</p>
-            <p class="product-card_price">200.000đ</p>
-          </div>
-          <div class="product-card">
-            <img src="/public/assets/images/product-1.png" alt="" />
-            <p>Áo Thun</p>
-            <p class="product-card_price">200.000đ</p>
-          </div>
-          <div class="product-card">
-            <img src="/public/assets/images/product-1.png" alt="" />
-            <p>Áo Thun</p>
-            <p class="product-card_price">200.000đ</p>
-          </div>
-          <div class="product-card">
-            <img src="/public/assets/images/product-1.png" alt="" />
-            <p>Áo Thun</p>
-            <p class="product-card_price">200.000đ</p>
-          </div>
-          <div class="product-card">
-            <img src="/public/assets/images/product-1.png" alt="" />
-            <p>Áo Thun</p>
-            <p class="product-card_price">200.000đ</p>
-          </div>
-          <div class="product-card">
-            <img src="/public/assets/images/product-1.png" alt="" />
-            <p>Áo Thun</p>
-            <p class="product-card_price">200.000đ</p>
-          </div>
-          <div class="product-card">
-            <img src="/public/assets/images/product-1.png" alt="" />
-            <p>Áo Thun</p>
-            <p class="product-card_price">200.000đ</p>
-          </div>
-          <div class="product-card">
-            <img src="/public/assets/images/product-1.png" alt="" />
-            <p>Áo Thun</p>
-            <p class="product-card_price">200.000đ</p>
-          </div>
-          <div class="product-card">
-            <img src="/public/assets/images/product-1.png" alt="" />
-            <p>Áo Thun</p>
-            <p class="product-card_price">200.000đ</p>
-          </div>
-          <div class="product-card">
-            <img src="/public/assets/images/product-1.png" alt="" />
-            <p>Áo Thun</p>
-            <p class="product-card_price">200.000đ</p>
-          </div>
-          <div class="product-card">
-            <img src="/public/assets/images/product-1.png" alt="" />
-            <p>Áo Thun</p>
-            <p class="product-card_price">200.000đ</p>
-          </div>
-          <div class="product-card">
-            <img src="/public/assets/images/product-1.png" alt="" />
-            <p>Áo Thun</p>
-            <p class="product-card_price">200.000đ</p>
-          </div>
-          <div class="product-card">
-            <img src="/public/assets/images/product-1.png" alt="" />
-            <p>Áo Thun</p>
-            <p class="product-card_price">200.000đ</p>
-          </div>
+<!--          <div class="product-card">-->
+<!--            <img src="/public/assets/images/product-1.png" alt="" />-->
+<!--            <p>Áo Thun</p>-->
+<!--            <p class="product-card_price">200.000đ</p>-->
+<!--          </div>-->
+<!--          <div class="product-card">-->
+<!--            <img src="/public/assets/images/product-1.png" alt="" />-->
+<!--            <p>Áo Thun</p>-->
+<!--            <p class="product-card_price">200.000đ</p>-->
+<!--          </div>-->
+<!--          <div class="product-card">-->
+<!--            <img src="/public/assets/images/product-1.png" alt="" />-->
+<!--            <p>Áo Thun</p>-->
+<!--            <p class="product-card_price">200.000đ</p>-->
+<!--          </div>-->
+<!--          <div class="product-card">-->
+<!--            <img src="/public/assets/images/product-1.png" alt="" />-->
+<!--            <p>Áo Thun</p>-->
+<!--            <p class="product-card_price">200.000đ</p>-->
+<!--          </div>-->
+<!--          <div class="product-card">-->
+<!--            <img src="/public/assets/images/product-1.png" alt="" />-->
+<!--            <p>Áo Thun</p>-->
+<!--            <p class="product-card_price">200.000đ</p>-->
+<!--          </div>-->
+<!--          <div class="product-card">-->
+<!--            <img src="/public/assets/images/product-1.png" alt="" />-->
+<!--            <p>Áo Thun</p>-->
+<!--            <p class="product-card_price">200.000đ</p>-->
+<!--          </div>-->
+<!--          <div class="product-card">-->
+<!--            <img src="/public/assets/images/product-1.png" alt="" />-->
+<!--            <p>Áo Thun</p>-->
+<!--            <p class="product-card_price">200.000đ</p>-->
+<!--          </div>-->
+<!--          <div class="product-card">-->
+<!--            <img src="/public/assets/images/product-1.png" alt="" />-->
+<!--            <p>Áo Thun</p>-->
+<!--            <p class="product-card_price">200.000đ</p>-->
+<!--          </div>-->
+<!--          <div class="product-card">-->
+<!--            <img src="/public/assets/images/product-1.png" alt="" />-->
+<!--            <p>Áo Thun</p>-->
+<!--            <p class="product-card_price">200.000đ</p>-->
+<!--          </div>-->
+<!--          <div class="product-card">-->
+<!--            <img src="/public/assets/images/product-1.png" alt="" />-->
+<!--            <p>Áo Thun</p>-->
+<!--            <p class="product-card_price">200.000đ</p>-->
+<!--          </div>-->
+<!--          <div class="product-card">-->
+<!--            <img src="/public/assets/images/product-1.png" alt="" />-->
+<!--            <p>Áo Thun</p>-->
+<!--            <p class="product-card_price">200.000đ</p>-->
+<!--          </div>-->
+<!--          <div class="product-card">-->
+<!--            <img src="/public/assets/images/product-1.png" alt="" />-->
+<!--            <p>Áo Thun</p>-->
+<!--            <p class="product-card_price">200.000đ</p>-->
+<!--          </div>-->
+<!--          <div class="product-card">-->
+<!--            <img src="/public/assets/images/product-1.png" alt="" />-->
+<!--            <p>Áo Thun</p>-->
+<!--            <p class="product-card_price">200.000đ</p>-->
+<!--          </div>-->
+<!--          <div class="product-card">-->
+<!--            <img src="/public/assets/images/product-1.png" alt="" />-->
+<!--            <p>Áo Thun</p>-->
+<!--            <p class="product-card_price">200.000đ</p>-->
+<!--          </div>-->
           <!--THÊM SẢN PHẨM CẦN THIẾT-->
         </div>
         <div class="pagination">
