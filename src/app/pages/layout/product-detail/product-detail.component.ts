@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductService } from './services/product.service';
+import { ProductService } from '@src/services/product.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -38,12 +38,10 @@ export class ProductDetailComponent implements OnInit {
       this.product = data;
       this.selectedImage = this.product.thumbnail;
 
-      // Gán mặc định color/size đầu tiên nếu có
       this.selectedColor = data.color?.[0] || '';
       this.selectedSize = data.size?.[0] || '';
     });
 
-    // Cần move đoạn gọi relatedProducts vào trong subscribe
     this.productService.getRelatedProducts().subscribe(all => {
       this.relatedProducts = all.filter(p => p.category === this.product?.category && p.id !== id);
     });
