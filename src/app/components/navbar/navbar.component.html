@@ -1,120 +1,161 @@
-<mat-toolbar class="mat-elevation-z0 ">
-  <img
-    [src]="'../../../../public/assets/logo/image-8.png'"
-    alt="logo"
-    height="42"
-    width="303"
-    id="logo-with-text"
-    (click)="navigate('/home')"
-  />
-  <!-- Navigation links -->
-  <div class="nav-links">
-    <a class="nav-link" (click)="navigate('/product/1')">Áo</a>
-    <a class="nav-link" (click)="navigate('/product/2')">Quần</a>
-    <a class="nav-link" (click)="navigate('/product/3')">Khuyến Mãi</a>
-  </div>
-
-<!--   //Search bar-->
-  <mat-form-field appearance="fill" class="example-spacer"  id="search-input">
-    <mat-icon matPrefix>search</mat-icon>
-    <input
-      matInput
-      placeholder="Tìm kiếm sản phẩm..."
-      [(ngModel)]="searchQuery"
-      (input)="onSearchInput()"
-      #searchInput
-    />
-    <!-- Search dropdown -->
-    <div class="dropdown" *ngIf="showDropdown">
-      <div class="dropdown-item" *ngIf="isSearching">
-        <div class="spinner">
-          <mat-spinner diameter="24"></mat-spinner>
-        </div>
-      </div>
-
-      <div class="dropdown-item" *ngIf="!isSearching && searchResults.length === 0">
-        <div class="no-results">Không tìm thấy kết quả</div>
-      </div>
-
-      <div class="dropdown-item"
-           *ngFor="let product of searchResults"
-           (click)="navigateToProduct(product)">
-        <img [src]="product.image" [alt]="product.name" />
-        <div class="product-info">
-          <span class="name"><b>{{ product.name }}</b></span>
-          <span class="price">{{ product.price | currency:'VND':'symbol':'1.0-0' }}</span>
+<!-- ****** Header Area Start ****** -->
+<header class="header_area">
+  <!-- Top Header Area Start -->
+  <div class="top_header_area">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-end">
+        <div class="col-12 col-lg-7">
+          <div class="top_single_area d-flex align-items-center">
+            <!-- Logo Area -->
+            <div class="top_logo">
+              <a href="#"
+                ><img src="/public/assets/images/core-img/logo.png" alt=""
+              /></a>
+            </div>
+            <!-- Cart & Menu Area -->
+            <div class="header-cart-menu d-flex align-items-center ml-auto">
+              <!-- Cart Area -->
+              <div class="cart">
+                <a href="#" id="header-cart-btn" target="_blank"
+                  ><span class="cart_quantity">2</span>
+                  <i class="ti-bag"></i> Your Bag $20</a
+                >
+                <!-- Cart List Area Start -->
+                <!-- <ul class="cart-list">
+                  <li>
+                    <a href="#" class="image"
+                      ><img
+                        src="/public/assets/images/product-img/product-10.jpg"
+                        class="cart-thumb"
+                        alt=""
+                    /></a>
+                    <div class="cart-item-desc">
+                      <h6><a href="#">Women's Fashion</a></h6>
+                      <p>1x - <span class="price">$10</span></p>
+                    </div>
+                    <span class="dropdown-product-remove"
+                      ><i class="icon-cross"></i
+                    ></span>
+                  </li>
+                  <li>
+                    <a href="#" class="image"
+                      ><img
+                        src="/public/assets/images/product-img/product-11.jpg"
+                        class="cart-thumb"
+                        alt=""
+                    /></a>
+                    <div class="cart-item-desc">
+                      <h6><a href="#">Women's Fashion</a></h6>
+                      <p>1x - <span class="price">$10</span></p>
+                    </div>
+                    <span class="dropdown-product-remove"
+                      ><i class="icon-cross"></i
+                    ></span>
+                  </li>
+                  <li class="total">
+                    <span class="pull-right">Total: $20.00</span>
+                    <a href="cart.html" class="btn btn-sm btn-cart">Cart</a>
+                    <a href="checkout-1.html" class="btn btn-sm btn-checkout"
+                      >Checkout</a
+                    >
+                  </li>
+                </ul> -->
+              </div>
+              <div class="header-right-side-menu ml-15">
+                <a href="#" id="sideMenuBtn"
+                  ><i class="ti-menu" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </mat-form-field>
-
-<!--  <span class="example-spacer"></span>-->
-<!--  <mat-form-field appearance="fill" id="search-input">-->
-<!--    <mat-icon matPrefix>search</mat-icon>-->
-<!--    <input-->
-<!--      matInput-->
-<!--      placeholder="Tìm kiếm sản phẩm..."-->
-<!--      (input)="onSearchInput()"-->
-<!--      #searchInput-->
-<!--    />-->
-<!--  </mat-form-field>-->
-
-
-<!--  @if (showDropdown) {-->
-<!--    <div class="dropdown" #dropdown>-->
-<!--      @if (loading$ | async) {-->
-<!--        <div class="spinner-overlay">-->
-<!--          <mat-progress-spinner></mat-progress-spinner>-->
-<!--        </div>-->
-<!--      }-->
-<!--      @if ((searchResults$ | async)?.length == 0 || (error$ | async)) {-->
-<!--        @if (showDropdown) {-->
-<!--          <div class="dropdown-item">-->
-<!--            <div class="name-author">Không tìm thấy kết quả</div>-->
-<!--          </div>-->
-<!--        }-->
-<!--      }-->
-<!--      @for (ebook of searchResults$ | async; track ebook) {-->
-<!--        @if (showDropdown) {-->
-<!--          <div class="dropdown-item" (click)="navigateToEbookDetailPage(ebook)">-->
-<!--            <img [src]="ebook.imageUrl" [alt]="ebook.name" />-->
-<!--            <div class="name-author">-->
-<!--              <span class="name"-->
-<!--              ><b>{{ ebook.name }}</b></span-->
-<!--              >-->
-<!--              <span class="author">{{ ebook.author }}</span>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        }-->
-<!--      }-->
-<!--    </div>-->
-<!--  }-->
-  <div id="cart">
-    <img src="../../../../public/assets/logo/shopping-cart.png" alt="cart"
-         height="42"
-         width="303"
-         id="shopping-cart"
-         (click)="navigate('/cart')"
-
-    />
-
   </div>
-  <!-- User section -->
-  <div id="avatar">
-    <button mat-icon-button [matMenuTriggerFor]="userMenu">
 
-      <mat-icon>account_circle</mat-icon>
-    </button>
+  <!-- Top Header Area End -->
+  <div class="main_header_area">
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-12 d-md-flex justify-content-between">
+          <!-- Header Social Area -->
+          <div class="header-social-area">
+            <!-- <a href="#"
+              ><span class="karl-level">Share</span>
+              <i class="fa fa-pinterest" aria-hidden="true"></i
+            ></a> -->
+            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+          </div>
+          <!-- Menu Area -->
+          <div class="main-menu-area">
+            <nav class="navbar navbar-expand-lg align-items-start">
+              <!-- <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#karl-navbar"
+                aria-controls="karl-navbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"><i class="ti-menu"></i></span>
+              </button> -->
 
-    <mat-menu #userMenu="matMenu">
-      <button mat-menu-item (click)="navigate('/profile')">
-        <mat-icon>person</mat-icon>
-        <span>Hồ sơ</span>
-      </button>
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>logout</mat-icon>
-        <span>Đăng xuất</span>
-      </button>
-    </mat-menu>
+              <div
+                class="collapse navbar-collapse align-items-start collapse"
+                id="karl-navbar"
+              >
+                <ul class="navbar-nav animated" id="nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home</a>
+                  </li>
+                  <!-- <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="karlDropdown"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      >Pages</a
+                    >
+                    <div class="dropdown-menu" aria-labelledby="karlDropdown">
+                      <a class="dropdown-item" href="index.html">Home</a>
+                      <a class="dropdown-item" href="shop.html">Shop</a>
+                      <a class="dropdown-item" href="product-details.html"
+                        >Product Details</a
+                      >
+                      <a class="dropdown-item" href="cart.html">Cart</a>
+                      <a class="dropdown-item" href="checkout.html">Checkout</a>
+                    </div>
+                  </li> -->
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Dresses</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"
+                      ><span class="karl-level">hot</span> Shoes</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+          <!-- Help Line -->
+          <div class="help-line">
+            <a href="tel:+346573556778"
+              ><i class="ti-headphone-alt"></i> +34 657 3556 778</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</mat-toolbar>
+</header>
+<!-- ****** Header Area End ****** -->
