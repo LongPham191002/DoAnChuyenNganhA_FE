@@ -9,4 +9,9 @@
 
 }
 
+#footer-container {
+  border: 2px solid red; /* Để chắc chắn rằng div chứa footer đang hiển thị */
+  min-height: 100px; /* Đảm bảo footer có đủ không gian */
+}
+
 

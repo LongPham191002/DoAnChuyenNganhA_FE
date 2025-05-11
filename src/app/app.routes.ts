@@ -18,15 +18,13 @@ export const routes: Routes = [
   },
 
   {
-    path: '',
-    loadChildren: () =>
-      import('./pages/login/login.route').then((m) => m.LOGIN_ROUTES),
-    // canMatch: [AuthGuards.canMatchMain],
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.route').then(m => m.LOGIN_ROUTES),
   },
+
   {
-    path: '',
-    loadChildren: () =>
-      import('./pages/signup/signup.route').then((m) => m.SIGNUP_ROUTES),
+    path: 'signup',
+    loadChildren: () => import('./pages/signup/signup.route').then(m => m.SIGNUP_ROUTES),
   },
   // {
   //   path: 'loading',

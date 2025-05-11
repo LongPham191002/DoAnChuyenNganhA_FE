@@ -146,3 +146,57 @@
     }
   }
 }
+
+.header-contact-search {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+
+  .help-line {
+    margin-bottom: 5px;
+
+    a {
+      font-size: 14px;
+      color: #333;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+
+      i {
+        margin-right: 5px;
+      }
+
+      &:hover {
+        color: #ff084e;
+      }
+    }
+  }
+
+  .header-search-box {
+    input {
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      padding: 6px 15px;
+      font-size: 14px;
+      width: 200px;
+      transition: all 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: #ff084e;
+        box-shadow: 0 0 5px rgba(255, 8, 78, 0.3);
+      }
+
+      @media (max-width: 768px) {
+        width: 160px;
+      }
+
+      @media (max-width: 576px) {
+        width: 120px;
+        font-size: 12px;
+      }
+    }
+  }
+}
+

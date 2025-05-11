@@ -1,81 +1,100 @@
+// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
-import {
-  Auth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  signOut,
-} from '@angular/fire/auth';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { from, Observable, of, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { environment } from '../environments/environment';
-import { Store } from '@ngrx/store';
-import { AuthState } from '../ngrxs/auth/auth.state';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+
+const API_URL = 'http://localhost:3000/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private auth: Auth,
-    private http: HttpClient,
-    private store: Store<{ auth: AuthState }>,
-  ) {}
+  private authStatus = new BehaviorSubject<boolean>(this.hasToken());
+  private currentUserSubject = new BehaviorSubject<any>(this.getUserFromLocalStorage());
+  public currentUser = this.currentUserSubject.asObservable();
 
-  signInWithGoogle() {
-    return from(signInWithPopup(this.auth, new GoogleAuthProvider())).pipe(
-      catchError((error: any) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.customData.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        console.error('Error:', { errorCode, errorMessage, email, credential });
-        return of(credential);
+  constructor(private http: HttpClient) {}
+
+  // Đăng ký người dùng
+  signup(data: { name: string; email: string; password: string; phone?: string; address?: string }): Observable<any> {
+    return this.http.post(`${API_URL}/register`, data).pipe(
+      tap((res: any) => {
+        this.handleAuthSuccess(res);
       }),
+      catchError(this.handleError),
     );
   }
 
-  signInWithStaticUser(email: string, password: string) {
-    return this.http
-      .post<{ access_token: string }>(`${environment.apiUrl}/auth/login`, {
-        email: email,
-        password: password,
-      })
-      .pipe(catchError(this.handleError));
+  // Đăng nhập người dùng
+  login(email: string, password: string): Observable<any> {
+    return this.http.post(`${API_URL}/login`, { email, password }).pipe(
+      tap((res: any) => {
+        this.handleAuthSuccess(res);
+      }),
+      catchError(this.handleError),
+    );
   }
 
+  // Đăng xuất
+  logout() {
+    localStorage.removeItem('access_token');
+    this.authStatus.next(false);
+    this.currentUserSubject.next(null);
+  }
+
+  // Kiểm tra xem người dùng đã đăng nhập chưa
+  isAuthenticated(): Observable<boolean> {
+    return this.authStatus.asObservable();
+  }
+
+  // Lưu thông tin người dùng và token vào localStorage
+  private handleAuthSuccess(res: { access_token: string; user: any }) {
+    if (res.access_token) {
+      localStorage.setItem('access_token', res.access_token);
+      localStorage.setItem('user', JSON.stringify(res.user));  // Lưu thông tin người dùng vào localStorage
+      this.authStatus.next(true);
+      this.currentUserSubject.next(res.user);  // Cập nhật thông tin người dùng
+    }
+  }
+
+  // Lấy thông tin người dùng từ localStorage
+  getUserFromLocalStorage() {
+    const userJson = localStorage.getItem('user');
+    if (!userJson) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(userJson);
+    } catch (e) {
+      console.error('Error parsing user from localStorage', e);
+      return null;
+    }
+  }
+
+
+  // auth.service.ts
+  public updateCurrentUser(user: any) {
+    this.currentUserSubject.next(user);
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+
+
+  // Kiểm tra token trong localStorage
+  private hasToken(): boolean {
+    return !!localStorage.getItem('access_token');
+  }
+
+  // Xử lý lỗi
   private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An unknown error occurred!';
+    let errorMessage = 'Có lỗi xảy ra!';
     if (error.error instanceof ErrorEvent) {
-      // Client-side or network error
-      errorMessage = `Đang xảy ra lỗi`;
+      errorMessage = `Lỗi phía client: ${error.error.message}`;
     } else {
-      // Backend error
-      errorMessage = `Đang xảy ra lỗi`;
+      errorMessage = `Lỗi phía server: ${error.message}`;
     }
     return throwError(() => errorMessage);
-  }
-
-  logout() {
-    return from(signOut(this.auth)).pipe(
-      catchError((error: any) => {
-        console.error('Error:', error);
-        return of(error);
-      }),
-    );
-  }
-
-  isSignedIn(): Observable<boolean> {
-    return new Observable<boolean>((observer) => {
-      this.auth.onAuthStateChanged((user) => {
-        observer.next(!!user);
-      });
-    });
-  }
-
-  isStaticUser(): Observable<boolean> {
-    return this.store
-      .select('auth', 'isStaticUser')
-      .pipe(map((staticUser) => !!staticUser));
   }
 }

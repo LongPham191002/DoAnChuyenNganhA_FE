@@ -20,7 +20,7 @@ import {Router} from '@angular/router';
     MatMenuModule,
     MatProgressSpinnerModule],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss'
+  styleUrls:  ['./footer.component.scss'],
 })
 export class FooterComponent {
   constructor(private router: Router) {}

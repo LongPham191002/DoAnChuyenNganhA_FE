@@ -1,1 +1,21 @@
-<p>profile works!</p>
+<mat-card class="profile-card" *ngIf="user">
+  <h2 class="title">Thông tin cá nhân</h2>
+  <div class="profile-content">
+    <div class="avatar">
+      <img
+        [src]="user.image_url ? getImageUrl() : 'assets/images/core-img/default-avatar.png'"
+        alt="Ảnh đại diện"
+      />
+    </div>
+    <div class="info">
+      <p><strong>Tên:</strong> {{ user.name }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>SĐT:</strong> {{ user.phone }}</p>
+      <p><strong>Địa chỉ:</strong> {{ user.address }}</p>
+    </div>
+  </div>
+</mat-card>
+
+<mat-card *ngIf="!user" class="loading-card">
+  <p>Đang tải thông tin người dùng...</p>
+</mat-card>

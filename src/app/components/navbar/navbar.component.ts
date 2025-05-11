@@ -96,9 +96,9 @@ export class NavbarComponent {
 
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
-    // Đóng dropdown khi click ra ngoài
-    if (!this.searchInput.nativeElement.contains(event.target)) {
+    if (this.searchInput?.nativeElement && !this.searchInput.nativeElement.contains(event.target)) {
       this.showDropdown = false;
     }
   }
+
 }

@@ -148,11 +148,24 @@
             </nav>
           </div>
           <!-- Help Line -->
-          <div class="help-line">
-            <a href="tel:+346573556778"
+          <div class="header-contact-search">
+            <div class="help-line">
+              <a href="tel:+346573556778"
               ><i class="ti-headphone-alt"></i> +34 657 3556 778</a
-            >
+              >
+            </div>
+            <div class="header-search-box">
+              <input
+                #searchInput
+                type="text"
+                [(ngModel)]="searchQuery"
+                (input)="onSearchInput()"
+                placeholder="Tìm sản phẩm..."
+                class="form-control"
+              />
+            </div>
           </div>
+
         </div>
       </div>
     </div>
