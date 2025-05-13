@@ -130,6 +130,7 @@
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-star-o" aria-hidden="true"></i>
+            <span class="rating-count">(24 reviews)</span>
           </div>
 
           <div class="widget size mb-50">
@@ -178,7 +179,22 @@
             >
               Add to cart
             </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary ml-2 wishlist-btn"
+            >
+              <i class="fa fa-heart-o"></i>
+            </button>
           </form>
+
+          <!-- Social Sharing -->
+          <div class="social-sharing mb-30">
+            <span>Share:</span>
+            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+            <a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a>
+            <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+          </div>
 
           <div id="accordion" role="tablist">
             <div class="card">
@@ -290,126 +306,211 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- <<<<<<<<<<<<<<<<<<<< Single Product Details Area End >>>>>>>>>>>>>>>>>>>>>>>>> -->
-
-<!-- ****** Quick View Modal Area Start ****** -->
-<div
-  class="modal fade"
-  id="quickview"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="quickview"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <button
-        type="button"
-        class="close btn"
-        data-dismiss="modal"
-        aria-label="Close"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <div class="modal-body">
-        <div class="quickview_body">
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-lg-5">
-                <div class="quickview_pro_img">
-                  <img
-                    src="/public/assets/images/product-img/product-1.jpg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div class="col-12 col-lg-7">
-                <div class="quickview_pro_des">
-                  <h4 class="title">Boutique Silk Dress</h4>
-                  <div class="top_seller_product_rating mb-15">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                  </div>
-                  <h5 class="price">$120.99 <span>$130</span></h5>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Mollitia expedita quibusdam aspernatur, sapiente consectetur
-                    accusantium perspiciatis praesentium eligendi, in fugiat?
-                  </p>
-                  <a href="#">View Full Product Details</a>
-                </div>
-                <!-- Add to Cart Form -->
-                <form class="cart" method="post">
-                  <div class="quantity">
-                    <span
-                      class="qty-minus"
-                      onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) && qty > 1 ) effect.value--;return false;"
-                      ><i class="fa fa-minus" aria-hidden="true"></i
-                    ></span>
-
-                    <input
-                      type="number"
-                      class="qty-text"
-                      id="qty2"
-                      step="1"
-                      min="1"
-                      max="12"
-                      name="quantity"
-                      value="1"
-                    />
-
-                    <span
-                      class="qty-plus"
-                      onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"
-                      ><i class="fa fa-plus" aria-hidden="true"></i
-                    ></span>
-                  </div>
-                  <button
-                    type="submit"
-                    name="addtocart"
-                    value="5"
-                    class="cart-submit"
+            <div class="card">
+              <div class="card-header" role="tab" id="headingFour">
+                <h6 class="mb-0">
+                  <a
+                    class="collapsed"
+                    data-toggle="collapse"
+                    href="#collapseFour"
+                    aria-expanded="false"
+                    aria-controls="collapseFour"
+                    >Reviews (24)</a
                   >
-                    Add to cart
-                  </button>
-                  <!-- Wishlist -->
-                  <div class="modal_pro_wishlist">
-                    <a href="wishlist.html" target="_blank"
-                      ><i class="ti-heart"></i
-                    ></a>
-                  </div>
-                  <!-- Compare -->
-                  <div class="modal_pro_compare">
-                    <a href="compare.html" target="_blank"
-                      ><i class="ti-stats-up"></i
-                    ></a>
-                  </div>
-                </form>
+                </h6>
+              </div>
+              <div
+                id="collapseFour"
+                class="collapse"
+                role="tabpanel"
+                aria-labelledby="headingFour"
+                data-parent="#accordion"
+              >
+                <div class="card-body">
+                  <div class="review-section">
+                    <div class="review-form mb-4">
+                      <h5>Write a Review</h5>
+                      <form>
+                        <div class="form-group">
+                          <label>Rating</label>
+                          <div class="rating-stars">
+                            <i class="fa fa-star-o" data-rating="1"></i>
+                            <i class="fa fa-star-o" data-rating="2"></i>
+                            <i class="fa fa-star-o" data-rating="3"></i>
+                            <i class="fa fa-star-o" data-rating="4"></i>
+                            <i class="fa fa-star-o" data-rating="5"></i>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="review-title">Title</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="review-title"
+                            placeholder="Summarize your review"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="review-text">Review</label>
+                          <textarea
+                            class="form-control"
+                            id="review-text"
+                            rows="3"
+                            placeholder="What did you like or dislike?"
+                          ></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                          Submit Review
+                        </button>
+                      </form>
+                    </div>
 
-                <div class="share_wf mt-30">
-                  <p>Share With Friend</p>
-                  <div class="_icon">
-                    <a href="#"
-                      ><i class="fa fa-facebook" aria-hidden="true"></i
-                    ></a>
-                    <a href="#"
-                      ><i class="fa fa-twitter" aria-hidden="true"></i
-                    ></a>
-                    <a href="#"
-                      ><i class="fa fa-pinterest" aria-hidden="true"></i
-                    ></a>
-                    <a href="#"
-                      ><i class="fa fa-google-plus" aria-hidden="true"></i
-                    ></a>
+                    <div class="reviews-list">
+                      <div class="review-item mb-4">
+                        <div
+                          class="review-header d-flex justify-content-between"
+                        >
+                          <div class="review-author">
+                            <strong>Sarah Johnson</strong>
+                            <div class="review-rating">
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                            </div>
+                          </div>
+                          <span class="review-date">2 days ago</span>
+                        </div>
+                        <h6 class="review-title">Perfect fit and color!</h6>
+                        <p class="review-text">
+                          I love this dress! The color is exactly as pictured
+                          and it fits perfectly. The material is comfortable and
+                          flows beautifully.
+                        </p>
+                        <div
+                          class="review-footer d-flex justify-content-between"
+                        >
+                          <span class="helpful-count"
+                            >12 people found this helpful</span
+                          >
+                          <div class="review-actions">
+                            <button
+                              class="btn btn-sm btn-outline-secondary like-btn"
+                            >
+                              <i class="fa fa-thumbs-up"></i> Helpful
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary">
+                              <i class="fa fa-flag"></i> Report
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="review-item mb-4">
+                        <div
+                          class="review-header d-flex justify-content-between"
+                        >
+                          <div class="review-author">
+                            <strong>Michael Chen</strong>
+                            <div class="review-rating">
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star-o"></i>
+                            </div>
+                          </div>
+                          <span class="review-date">1 week ago</span>
+                        </div>
+                        <h6 class="review-title">Great dress but runs large</h6>
+                        <p class="review-text">
+                          The dress is beautiful but I found it runs a bit
+                          large. I usually wear size 38 but had to exchange for
+                          a 36. Quality is good for the price.
+                        </p>
+                        <div
+                          class="review-footer d-flex justify-content-between"
+                        >
+                          <span class="helpful-count"
+                            >5 people found this helpful</span
+                          >
+                          <div class="review-actions">
+                            <button
+                              class="btn btn-sm btn-outline-secondary like-btn"
+                            >
+                              <i class="fa fa-thumbs-up"></i> Helpful
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary">
+                              <i class="fa fa-flag"></i> Report
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="review-item mb-4">
+                        <div
+                          class="review-header d-flex justify-content-between"
+                        >
+                          <div class="review-author">
+                            <strong>Emma Rodriguez</strong>
+                            <div class="review-rating">
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star-o"></i>
+                              <i class="fa fa-star-o"></i>
+                            </div>
+                          </div>
+                          <span class="review-date">3 weeks ago</span>
+                        </div>
+                        <h6 class="review-title">Color slightly different</h6>
+                        <p class="review-text">
+                          The dress is nice but the color is more mustard than
+                          the bright yellow in the photo. Material is a bit thin
+                          but comfortable.
+                        </p>
+                        <div
+                          class="review-footer d-flex justify-content-between"
+                        >
+                          <span class="helpful-count"
+                            >3 people found this helpful</span
+                          >
+                          <div class="review-actions">
+                            <button
+                              class="btn btn-sm btn-outline-secondary like-btn"
+                            >
+                              <i class="fa fa-thumbs-up"></i> Helpful
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary">
+                              <i class="fa fa-flag"></i> Report
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <nav aria-label="Reviews pagination">
+                      <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#" tabindex="-1"
+                            >Previous</a
+                          >
+                        </li>
+                        <li class="page-item active">
+                          <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="#">2</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="#">3</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="#">Next</a>
+                        </li>
+                      </ul>
+                    </nav>
                   </div>
                 </div>
               </div>
@@ -419,5 +520,7 @@
       </div>
     </div>
   </div>
-</div>
+</section>
+<!-- <<<<<<<<<<<<<<<<<<<< Single Product Details Area End >>>>>>>>>>>>>>>>>>>>>>>>> -->
+
 <!-- ****** Quick View Modal Area End ****** -->

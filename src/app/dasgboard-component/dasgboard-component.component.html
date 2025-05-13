@@ -1,0 +1,68 @@
+<div class="dashboard-container">
+  <app-header></app-header>
+
+  <div class="main-content">
+    <app-sidebar></app-sidebar>
+
+    <div class="content-area">
+      <h1 class="page-title">Dashboard</h1>
+
+      <div class="stats-row">
+        <app-stats-card
+          icon="attach_money"
+          title="Total Sales"
+          [value]="totalSales | currency"
+          color="primary"
+        >
+        </app-stats-card>
+
+        <app-stats-card
+          icon="shopping_cart"
+          title="Total Orders"
+          [value]="totalOrders"
+          color="accent"
+        >
+        </app-stats-card>
+
+        <app-stats-card
+          icon="inventory"
+          title="Total Products"
+          [value]="totalProducts"
+          color="warn"
+        >
+        </app-stats-card>
+
+        <app-stats-card
+          icon="people"
+          title="Total Customers"
+          [value]="totalCustomers"
+          color="success"
+        >
+        </app-stats-card>
+      </div>
+
+      <div class="charts-row">
+        <div class="chart-container">
+          <h3>Sales Overview</h3>
+          <canvas
+            baseChart
+            [data]="salesData"
+            [labels]="['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']"
+            [chartType]="'line'"
+          >
+          </canvas>
+        </div>
+      </div>
+
+      <div class="data-row">
+        <div class="recent-orders">
+          <app-recent-orders [orders]="recentOrders"></app-recent-orders>
+        </div>
+
+        <div class="top-products">
+          <app-top-products [products]="topProducts"></app-top-products>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

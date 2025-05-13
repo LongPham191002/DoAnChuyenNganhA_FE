@@ -18,10 +18,10 @@
               <div class="cart">
                 <a href="#" id="header-cart-btn" target="_blank"
                   ><span class="cart_quantity">2</span>
-                  <i class="ti-bag"></i> Your Bag $20</a
+                  <i class="ti-bag"></i>Your Bag</a
                 >
                 <!-- Cart List Area Start -->
-                <!-- <ul class="cart-list">
+                <ul class="cart-list">
                   <li>
                     <a href="#" class="image"
                       ><img
@@ -59,7 +59,7 @@
                       >Checkout</a
                     >
                   </li>
-                </ul> -->
+                </ul>
               </div>
               <div class="header-right-side-menu ml-15">
                 <a href="#" id="sideMenuBtn"
@@ -80,18 +80,13 @@
         <div class="col-12 d-md-flex justify-content-between">
           <!-- Header Social Area -->
           <div class="header-social-area">
-            <!-- <a href="#"
-              ><span class="karl-level">Share</span>
-              <i class="fa fa-pinterest" aria-hidden="true"></i
-            ></a> -->
-            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <mat-icon>home</mat-icon>
+            <mat-icon>fa-facebook</mat-icon>
           </div>
           <!-- Menu Area -->
           <div class="main-menu-area">
             <nav class="navbar navbar-expand-lg align-items-start">
-              <!-- <button
+              <button
                 class="navbar-toggler"
                 type="button"
                 data-toggle="collapse"
@@ -101,7 +96,7 @@
                 aria-label="Toggle navigation"
               >
                 <span class="navbar-toggler-icon"><i class="ti-menu"></i></span>
-              </button> -->
+              </button>
 
               <div
                 class="collapse navbar-collapse align-items-start collapse"
@@ -111,7 +106,7 @@
                   <li class="nav-item active">
                     <a class="nav-link" href="index.html">Home</a>
                   </li>
-                  <!-- <li class="nav-item dropdown">
+                  <li class="nav-item dropdown">
                     <a
                       class="nav-link dropdown-toggle"
                       href="#"
@@ -131,14 +126,9 @@
                       <a class="dropdown-item" href="cart.html">Cart</a>
                       <a class="dropdown-item" href="checkout.html">Checkout</a>
                     </div>
-                  </li> -->
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Dresses</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#"
-                      ><span class="karl-level">hot</span> Shoes</a
-                    >
+                    <a class="nav-link" href="#">Dresses</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
@@ -148,10 +138,20 @@
             </nav>
           </div>
           <!-- Help Line -->
+          <!-- Help Line -->
           <div class="help-line">
-            <a href="tel:+346573556778"
-              ><i class="ti-headphone-alt"></i> +34 657 3556 778</a
-            >
+            <a href="tel:+346573556778">
+              <i class="ti-headphone-alt"></i> +34 657 3556 778
+            </a>
+
+            <!-- Thêm nút toggle search -->
+            <i class="ti-search search-toggle" id="searchToggle"></i>
+
+            <!-- Search form -->
+            <div class="search-form">
+              <input type="text" placeholder="Search" />
+              <button type="submit"><i class="ti-search"></i></button>
+            </div>
           </div>
         </div>
       </div>
