@@ -1,0 +1,15 @@
+<div class="admin-container">
+  <aside class="sidebar">
+    <button (click)="activeTab = 'products'">Quản lý sản phẩm</button>
+    <button (click)="activeTab = 'users'">Danh sách người dùng</button>
+    <button (click)="activeTab = 'orders'">Danh sách đơn hàng</button>
+    <button (click)="activeTab = 'stats'">Thống kê doanh thu</button>
+  </aside>
+
+  <main class="content">
+    <app-product-manager *ngIf="activeTab === 'products'"></app-product-manager>
+    <app-user-list *ngIf="activeTab === 'users'"></app-user-list>
+    <app-order-list *ngIf="activeTab === 'orders'"></app-order-list>
+    <app-statistics *ngIf="activeTab === 'stats'"></app-statistics>
+  </main>
+</div>

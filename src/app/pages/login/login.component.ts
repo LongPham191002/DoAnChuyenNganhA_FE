@@ -83,11 +83,21 @@ export class LoginComponent implements  OnDestroy {
 
         // ✅ Lưu token vào localStorage
         localStorage.setItem('auth-token', response.access_token);
+        const role = response.user?.role;
+        if (role === 'Admin') {
+          this.router.navigate(['/admin']);
+          this._matSnackBar.open('Đăng nhập thành công!', 'Đóng', { duration: 3000 });
 
-        this._matSnackBar.open('Đăng nhập thành công!', 'Đóng', { duration: 3000 });
+        } else {
+          this.router.navigate(['/profile']);
+          this._matSnackBar.open('Đăng nhập thành công!', 'Đóng', { duration: 3000 });
 
-        // ✅ Chuyển tới trang profile để hiển thị thông tin người dùng
-        this.router.navigate(['/profile']);
+        }
+
+
+
+        // // ✅ Chuyển tới trang profile để hiển thị thông tin người dùng
+        // this.router.navigate(['/profile']);
       },
       (error) => {
         console.log('Login failed, error:', error);

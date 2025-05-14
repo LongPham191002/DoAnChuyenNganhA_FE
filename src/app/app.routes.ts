@@ -26,6 +26,7 @@ export const routes: Routes = [
     path: 'signup',
     loadChildren: () => import('./pages/signup/signup.route').then(m => m.SIGNUP_ROUTES),
   },
+
   // {
   //   path: 'loading',
   //   loadChildren: () =>

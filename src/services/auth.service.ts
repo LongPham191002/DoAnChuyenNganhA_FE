@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 const API_URL = 'http://localhost:3000/auth';
 
@@ -14,7 +15,7 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<any>(this.getUserFromLocalStorage());
   public currentUser = this.currentUserSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   // Đăng ký người dùng
   signup(data: { name: string; email: string; password: string; phone?: string; address?: string }): Observable<any> {
@@ -55,6 +56,8 @@ export class AuthService {
       localStorage.setItem('user', JSON.stringify(res.user));  // Lưu thông tin người dùng vào localStorage
       this.authStatus.next(true);
       this.currentUserSubject.next(res.user);  // Cập nhật thông tin người dùng
+
+
     }
   }
 

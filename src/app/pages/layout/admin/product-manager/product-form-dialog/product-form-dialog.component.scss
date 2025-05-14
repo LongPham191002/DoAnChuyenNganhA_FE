@@ -1,0 +1,93 @@
+::ng-deep {
+  mat-dialog-content {
+    padding: 24px;
+    max-height: 70vh;
+    overflow-y: auto;
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+
+      .mat-form-field {
+        width: 100%;
+
+        .mat-form-field-flex {
+          background-color: #f9fafb;
+          border-radius: 10px;
+          transition: background-color 0.3s ease;
+        }
+
+        &:hover .mat-form-field-flex {
+          background-color: #f1f5f9;
+        }
+
+        &.mat-focused .mat-form-field-flex {
+          background-color: #e3f2fd;
+        }
+
+        .mat-form-field-outline {
+          border-radius: 10px !important;
+        }
+
+        .mat-input-element {
+          font-size: 15px;
+          padding: 8px 0;
+        }
+      }
+
+      textarea.mat-input-element {
+        resize: vertical;
+        min-height: 100px;
+      }
+    }
+  }
+
+  h2[mat-dialog-title] {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 12px 0;
+    padding: 0 24px;
+  }
+
+  mat-dialog-actions {
+    padding: 16px 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+
+    button {
+      font-size: 14px;
+      padding: 10px 22px;
+      border-radius: 12px;
+      font-weight: 500;
+      text-transform: none;
+      transition: all 0.25s ease;
+
+      &:first-child {
+        color: #374151;
+        background: #f3f4f6;
+
+        &:hover {
+          background: #e5e7eb;
+        }
+      }
+
+      &:last-child {
+        background-color: #1976d2;
+        color: white;
+        box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+
+        &:hover {
+          background-color: #1565c0;
+        }
+
+        &:disabled {
+          background-color: #90caf9;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}

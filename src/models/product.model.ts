@@ -1,13 +1,13 @@
 export interface Product {
-  product_Id: number;
-  productName: string;
+  product_id: number;
+  product_name: string;
   description: string;
   price: number;
   size: string;
   color: string;
-  imageUrl: string;
+  image_url: string;
   status: 'In Stock' | 'Out of Stock';
-  productQuantity: number;
-  categoryId: number;
-  updateDate: string;
+  product_quantity: number;
+  category_id: number;
+  update_date: string;
 }

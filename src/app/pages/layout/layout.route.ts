@@ -44,6 +44,14 @@ export const LAYOUT_ROUTES: Routes = [
           ),
       },
 
+      {
+        path:'admin',
+        loadChildren: () =>
+          import('./admin/admin.route').then(
+            (m) => m.ADMIN_ROUTES,
+          ),
+      },
+
 
       // {
       //   path: 'book-info/:id',
