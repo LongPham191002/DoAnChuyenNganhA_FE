@@ -1,245 +1,43 @@
-// ****** Checkout Area Start ******
+// checkout.component.scss
 .checkout_area {
-  .container {
-    .row {
-      display: flex;
-      flex-wrap: wrap;
+  padding: 100px 0;
 
-      // Billing Address Section
-      .col-12.col-md-6 {
-        .checkout_details_area {
-          .cart-page-heading {
-            margin-bottom: 30px;
+  .checkout_details_area {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 5px;
+  }
 
-            h5 {
-              font-size: 18px;
-              font-weight: 700;
-              margin-bottom: 10px;
-              text-transform: uppercase;
-            }
+  .order-details-confirmation {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 5px;
 
-            p {
-              color: #6c757d;
-              margin-bottom: 0;
-            }
-          }
+    .order-details-form {
+      list-style: none;
+      padding: 0;
 
-          form {
-            .row {
+      li {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
 
-              .col-md-6,
-              .col-12 {
-                margin-bottom: 20px;
-
-                label {
-                  display: block;
-                  margin-bottom: 8px;
-                  font-size: 14px;
-                  font-weight: 500;
-
-                  span {
-                    color: #e62e04;
-                  }
-                }
-
-                .form-control {
-                  width: 100%;
-                  height: 42px;
-                  border: 1px solid #e5e5e5;
-                  border-radius: 0;
-                  padding: 0 15px;
-                  font-size: 14px;
-                  color: #6c757d;
-
-                  &:focus {
-                    outline: none;
-                    box-shadow: none;
-                    border-color: #222;
-                  }
-                }
-
-                .custom-select {
-                  height: 42px;
-                  border-radius: 0;
-                  border-color: #e5e5e5;
-                  font-size: 14px;
-                  color: #6c757d;
-
-                  &:focus {
-                    box-shadow: none;
-                    border-color: #222;
-                  }
-                }
-              }
-
-              .custom-control {
-                margin-bottom: 15px;
-
-                .custom-control-input {
-                  &:checked~.custom-control-label::before {
-                    background-color: #222;
-                    border-color: #222;
-                  }
-                }
-
-                .custom-control-label {
-                  cursor: pointer;
-                  font-size: 14px;
-
-                  &::before {
-                    border-radius: 0;
-                    border-color: #e5e5e5;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-
-      // Order Summary Section
-      .col-12.col-md-6.col-lg-5 {
-        .order-details-confirmation {
-          .cart-page-heading {
-            margin-bottom: 30px;
-
-            h5 {
-              font-size: 18px;
-              font-weight: 700;
-              margin-bottom: 10px;
-              text-transform: uppercase;
-            }
-
-            p {
-              color: #6c757d;
-              margin-bottom: 0;
-            }
-          }
-
-          .order-details-form {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #e5e5e5;
-
-            li {
-              display: flex;
-              justify-content: space-between;
-              padding: 10px 0;
-              border-top: 1px solid #e5e5e5;
-
-              &:first-child {
-                border-top: none;
-                font-weight: 700;
-              }
-
-              span {
-                &:last-child {
-                  font-weight: 500;
-                }
-              }
-            }
-          }
-
-          #accordion {
-            margin-bottom: 30px;
-
-            .card {
-              border-radius: 0;
-              border-color: #e5e5e5;
-              margin-bottom: 10px;
-
-              &:last-child {
-                margin-bottom: 0;
-              }
-
-              .card-header {
-                background-color: #fff;
-                border-bottom: none;
-                padding: 0;
-
-                h6 {
-                  margin-bottom: 0;
-
-                  a {
-                    display: block;
-                    padding: 15px 20px;
-                    color: #222;
-                    font-size: 14px;
-                    font-weight: 500;
-                    text-decoration: none;
-                    position: relative;
-
-                    &[aria-expanded="true"] {
-                      color: #e62e04;
-                    }
-
-                    i {
-                      margin-right: 10px;
-                    }
-
-                    &::after {
-                      content: '\f107';
-                      font-family: 'FontAwesome';
-                      position: absolute;
-                      right: 20px;
-                      top: 15px;
-                    }
-
-                    &[aria-expanded="true"]::after {
-                      content: '\f106';
-                    }
-                  }
-                }
-              }
-
-              .card-body {
-                padding: 20px;
-                font-size: 14px;
-                color: #6c757d;
-                border-top: 1px solid #e5e5e5;
-              }
-            }
-          }
-
-          .karl-checkout-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: #222;
-            color: #fff;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            border: none;
-            border-radius: 0;
-            transition: all 0.3s;
-
-            &:hover {
-              background-color: #e62e04;
-              color: #fff;
-            }
-          }
+        span:first-child {
+          font-weight: bold;
         }
       }
     }
   }
-}
 
+  .karl-checkout-btn {
+    background-color: #343a40;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    margin-right: 10px;
 
-
-// Responsive Styles
-@media (max-width: 767px) {
-  .checkout_area {
-    .container {
-      .row {
-        .col-12.col-md-6 {
-          .checkout_details_area {
-            margin-top: 30px;
-          }
-        }
-      }
+    &:hover {
+      background-color: #23272b;
     }
   }
 }
-
-// ****** Checkout Area End ******
