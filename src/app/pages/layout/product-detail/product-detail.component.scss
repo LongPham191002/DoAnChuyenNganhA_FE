@@ -1,16 +1,16 @@
 // Updated Variables
-$primary-color: #1f1f1f;
-$secondary-color: #fafafa;
-$accent-color: #ff6f61;
-$text-color: #444;
-$light-text: #888;
-$border-color: #ddd;
+$primary-color: #333;
+$secondary-color: #f5f5f5;
+$accent-color: #fbb710;
+$text-color: #666;
+$light-text: #999;
+$border-color: #e5e5e5;
 $shadow-color: rgba(0, 0, 0, 0.05);
 $font-stack: 'Poppins', sans-serif;
 $radius: 8px;
 
 // Mixins
-@mixin transition($property: all, $duration: 0.3s, $easing: ease) {
+@mixin transition($property: all, $duration: 0.3s, $easing: ease-in-out) {
   transition: $property $duration $easing;
 }
 
@@ -148,29 +148,134 @@ $radius: 8px;
     }
 
     .widget.size {
-      list-style: none;
-
       .widget-title {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
+        margin-bottom: 15px;
         color: $primary-color;
       }
 
-      ul {
-        list-style: none;
-        display: flex;
-        gap: 10px;
+      .widget-desc {
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          padding: 0;
+          margin: 0;
+          list-style: none;
 
-        li a {
-          display: block;
-          border: 1px solid $border-color;
-          padding: 10px;
-          border-radius: $radius;
-          @include transition;
+          li {
+            a {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              min-width: 40px;
+              height: 40px;
+              padding: 0 15px;
+              border: 1px solid $border-color;
+              border-radius: 4px;
+              color: $text-color;
+              font-size: 14px;
+              font-weight: 500;
+              text-decoration: none;
+              background-color: white;
+              @include transition;
 
-          &:hover {
-            background: $accent-color;
-            color: white;
+              &:hover {
+                border-color: $accent-color;
+                color: $accent-color;
+                transform: translateY(-2px);
+              }
+
+              &.active {
+                background-color: $accent-color;
+                border-color: $accent-color;
+                color: white;
+                transform: translateY(-2px);
+                @include box-shadow;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .widget.color {
+      .widget-title {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: $primary-color;
+      }
+
+      .widget-desc {
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          padding: 0;
+          margin: 0;
+          list-style: none;
+
+          li {
+            a {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              border: 2px solid $border-color;
+              color: transparent;
+              position: relative;
+              @include transition;
+
+              &::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background-color: currentColor;
+                opacity: 0.8;
+              }
+
+              &::after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                border: 2px solid transparent;
+                @include transition;
+              }
+
+              &:hover {
+                transform: scale(1.1);
+                border-color: $accent-color;
+              }
+
+              &.active {
+                border-color: $accent-color;
+                transform: scale(1.1);
+
+                &::after {
+                  border-color: $accent-color;
+                }
+              }
+            }
+
+            // Color variations
+            &:nth-child(1) a { color: #000000; } // Black
+            &:nth-child(2) a { color: #FF0000; } // Red
+            &:nth-child(3) a { color: #0000FF; } // Blue
+            &:nth-child(4) a { color: #FFFF00; } // Yellow
+            &:nth-child(5) a { color: #008000; } // Green
+            &:nth-child(6) a { color: #800080; } // Purple
+            &:nth-child(7) a { color: #FFA500; } // Orange
+            &:nth-child(8) a { color: #A52A2A; } // Brown
+            &:nth-child(9) a { color: #808080; } // Gray
+            &:nth-child(10) a { color: #FFFFFF; border: 2px solid #e5e5e5; } // White
           }
         }
       }

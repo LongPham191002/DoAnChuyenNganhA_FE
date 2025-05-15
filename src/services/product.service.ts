@@ -1,29 +1,37 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { Product } from '@src/models/product.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { BASE_URL } from '@src/consts/api';
+import { environment } from '@src/environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = BASE_URL + '/products';
+  constructor(
+    private http: HttpClient
+  ) {}
 
-  constructor(private http: HttpClient) {}
-
-  getProducts(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${environment.apiUrl}/products`);
   }
 
-  getProduct(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
+  getProductById(id: number): Observable<Product | undefined> {
+    return this.http.get<Product>(`${environment.apiUrl}/products/${id}`);
   }
 
-  addProduct(product: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, product);
+  // TODO: provide api search to get products by category //
+  getProductsByCategory(categoryId: number): Observable<Product[]> {
+    return this.getProducts().pipe(
+      map(products => products.filter(product => product.category_id === categoryId))
+    );
   }
 
-  getRelatedProducts(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + '?_limit=5');
+  // TODO: provide api search to get recommended products //
+  getRecommendedProducts(): Observable<Product[]> {
+    return this.getProducts().pipe(
+      map(products => products.sort(() => 0.5 - Math.random()).slice(0, 3))
+    )
   }
 }

@@ -9,7 +9,7 @@
             <p>Enter your cupone code</p>
           </div>
 
-          <form action="#" method="post">
+          <form (ngSubmit)="onSubmit()" #checkoutForm="ngForm">
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="first_name">First Name <span>*</span></label>
@@ -17,7 +17,8 @@
                   type="text"
                   class="form-control"
                   id="first_name"
-                  value=""
+                  name="firstName"
+                  [(ngModel)]="customerInfo.firstName"
                   required
                 />
               </div>
@@ -27,13 +28,20 @@
                   type="text"
                   class="form-control"
                   id="last_name"
-                  value=""
+                  name="lastName"
+                  [(ngModel)]="customerInfo.lastName"
                   required
                 />
               </div>
               <div class="col-12 mb-3">
                 <label for="company">Company Name</label>
-                <input type="text" class="form-control" id="company" value="" />
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="company" 
+                  name="company"
+                  [(ngModel)]="customerInfo.company"
+                />
               </div>
               <div class="col-12 mb-3">
                 <label for="country">Country <span>*</span></label>
@@ -54,7 +62,9 @@
                   type="text"
                   class="form-control mb-3"
                   id="street_address"
-                  value=""
+                  name="address"
+                  [(ngModel)]="customerInfo.address"
+                  required
                 />
                 <input
                   type="text"
@@ -69,16 +79,32 @@
                   type="text"
                   class="form-control"
                   id="postcode"
-                  value=""
+                  name="postcode"
+                  [(ngModel)]="customerInfo.postcode"
+                  required
                 />
               </div>
               <div class="col-12 mb-3">
                 <label for="city">Town/City <span>*</span></label>
-                <input type="text" class="form-control" id="city" value="" />
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="city" 
+                  name="city"
+                  [(ngModel)]="customerInfo.city"
+                  required
+                />
               </div>
               <div class="col-12 mb-3">
                 <label for="state">Province <span>*</span></label>
-                <input type="text" class="form-control" id="state" value="" />
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="state" 
+                  name="state"
+                  [(ngModel)]="customerInfo.state"
+                  required
+                />
               </div>
               <div class="col-12 mb-3">
                 <label for="phone_number">Phone No <span>*</span></label>
@@ -86,8 +112,10 @@
                   type="number"
                   class="form-control"
                   id="phone_number"
+                  name="phone"
+                  [(ngModel)]="customerInfo.phone"
                   min="0"
-                  value=""
+                  required
                 />
               </div>
               <div class="col-12 mb-4">
@@ -96,7 +124,9 @@
                   type="email"
                   class="form-control"
                   id="email_address"
-                  value=""
+                  name="email"
+                  [(ngModel)]="customerInfo.email"
+                  required
                 />
               </div>
 
@@ -106,10 +136,11 @@
                     type="checkbox"
                     class="custom-control-input"
                     id="customCheck1"
+                    required
                   />
-                  <label class="custom-control-label" for="customCheck1"
-                    >Terms and conitions</label
-                  >
+                  <label class="custom-control-label" for="customCheck1">
+                    Terms and conditions
+                  </label>
                 </div>
                 <div class="custom-control custom-checkbox d-block mb-2">
                   <input
@@ -131,6 +162,12 @@
                     >Subscribe to our newsletter</label
                   >
                 </div>
+              </div>
+
+              <div class="col-12">
+                <button type="submit" class="btn karl-checkout-btn">
+                  Place Order
+                </button>
               </div>
             </div>
           </form>
@@ -271,7 +308,12 @@
             </div>
           </div>
 
-          <a href="#" class="btn karl-checkout-btn">Place Order</a>
+          <div class="d-flex gap-3">
+            <a href="#" class="btn karl-checkout-btn">Place Order</a>
+            <button class="btn karl-print-btn" (click)="printInvoice()">
+              <i class="fa fa-print me-2"></i>Print Invoice
+            </button>
+          </div>
         </div>
       </div>
     </div>

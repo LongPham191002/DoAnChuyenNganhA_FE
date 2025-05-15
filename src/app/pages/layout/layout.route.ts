@@ -37,6 +37,11 @@ export const LAYOUT_ROUTES: Routes = [
           import('./cart/cart.route').then((m) => m.CART_ROUTES),
       },
       {
+        path: 'invoice',
+        loadChildren: () =>
+          import('./invoice/invoice.route').then((m) => m.INVOICE_ROUTES),
+      },
+      {
         path: 'profile',
         loadChildren: () =>
           import('./profile/profile.route').then(

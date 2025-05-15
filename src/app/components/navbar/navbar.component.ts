@@ -1,6 +1,5 @@
-
-import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, HostListener, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,6 +8,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../../services/cart.service';
+import { CartItem } from '../../../models/cart-item.model';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +17,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     MatToolbarModule,
     MatIconModule,
     MatFormFieldModule,
@@ -26,12 +28,14 @@ import { CommonModule } from '@angular/common';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   @ViewChild('searchInput') searchInput!: ElementRef;
 
   searchQuery: string = '';
   showDropdown: boolean = false;
   isSearching: boolean = false;
+  cartItems: CartItem[] = [];
+  cartTotal: number = 0;
 
   // Dữ liệu tĩnh cho demo
   searchResults: any[] = [
@@ -55,7 +59,25 @@ export class NavbarComponent {
     }
   ];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private cartService: CartService
+  ) {}
+
+  ngOnInit() {
+    this.cartService.cartItems$.subscribe(items => {
+      this.cartItems = items;
+      this.cartTotal = this.calculateTotal();
+    });
+  }
+
+  calculateTotal(): number {
+    return this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+  }
+
+  formatPrice(price: number): string {
+    return price.toFixed(2);
+  }
 
   onSearchInput() {
     if (this.searchQuery.length > 0) {

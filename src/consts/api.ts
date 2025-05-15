@@ -6,6 +6,8 @@ const REMOVE_FAVORITE = BASE_URL + '/users/favorite';
 const ADD_TO_CART = BASE_URL + 'orders';
 const UPDATE_CART = BASE_URL + 'orders';
 
+const CATEGORIES = BASE_URL + 'category'
+
 /// export to using global app
 export const PROFILE_API = {
     GET_PROFILE, ADD_FAVORITE, REMOVE_FAVORITE
@@ -16,3 +18,6 @@ export const CART_API = {
     UPDATE_CART,
 }
 
+export const CATEGORY_API = {
+    CATEGORIES,
+}

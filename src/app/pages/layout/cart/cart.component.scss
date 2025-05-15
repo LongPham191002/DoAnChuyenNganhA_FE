@@ -353,3 +353,66 @@ $font-stack: 'Poppins', sans-serif;
     }
   }
 }
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 120px;
+  margin: 0 auto;
+
+  .quantity-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    color: #333;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    padding: 0;
+
+    &:hover:not(:disabled) {
+      background: #f8f8f8;
+      border-color: #ddd;
+    }
+
+    &:active:not(:disabled) {
+      background: #eee;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  input[type="number"] {
+    width: 50px;
+    height: 32px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    background: #fff;
+    -moz-appearance: textfield; /* Firefox */
+    
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #ddd;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+    }
+  }
+}
