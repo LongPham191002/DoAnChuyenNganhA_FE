@@ -92,14 +92,14 @@
                       <a class="dropdown-item" href="checkout.html">Checkout</a>
                     </div>
                   </li> -->
-                  <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/categories']">Dresses</a>
+                  <li class="nav-item"  *ngFor="let category of categories">
+                    <a class="nav-link" [routerLink]="['/product', category.category_id]">{{ category.category_name }}</a>
                   </li>
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
                     <a class="nav-link" [routerLink]="['/product', 1]">
                       <span class="karl-level">hot</span> Shoes
                     </a>
-                  </li>
+                  </li> -->
                   <li class="nav-item">
                     <a class="nav-link" [routerLink]="['/contact']">Contact</a>
                   </li>

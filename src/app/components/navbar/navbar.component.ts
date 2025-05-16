@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../services/cart.service';
 import { CartItem } from '../../../models/cart-item.model';
+import { Category } from '@src/models/category.model';
+import { CategoryService } from '@src/services/category.service';
 
 @Component({
   selector: 'app-navbar',
@@ -36,6 +38,7 @@ export class NavbarComponent implements OnInit {
   isSearching: boolean = false;
   cartItems: CartItem[] = [];
   cartTotal: number = 0;
+  categories: Category[] = [];
 
   // Dữ liệu tĩnh cho demo
   searchResults: any[] = [
@@ -61,13 +64,21 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private cartService: CartService
+    private cartService: CartService,
+    private categoryService: CategoryService,
   ) {}
 
   ngOnInit() {
+    this.loadCategories();
     this.cartService.cartItems$.subscribe(items => {
       this.cartItems = items;
       this.cartTotal = this.calculateTotal();
+    });
+  }
+
+  loadCategories() {
+    this.categoryService.getCategories().subscribe(categories => {
+      this.categories = categories;
     });
   }
 
