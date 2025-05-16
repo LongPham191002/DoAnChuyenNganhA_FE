@@ -22,4 +22,9 @@ export class UserService {
   updateUser(user: any): Observable<any> {
     return this.http.put(`${this.API_URL}/${user.id}`, user);
   }
+
+  uploadAvatar(fileData: FormData): Observable<any> {
+    return this.http.post('http://localhost:3000/upload', fileData);
+  }
+
 }

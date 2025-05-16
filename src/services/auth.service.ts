@@ -4,6 +4,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import {Router} from '@angular/router';
+import firebase from 'firebase/compat/app';
+import { Auth, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth'; // ✅ Modular SDK
+
 
 const API_URL = 'http://localhost:3000/auth';
 
@@ -15,7 +18,7 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<any>(this.getUserFromLocalStorage());
   public currentUser = this.currentUserSubject.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private auth: Auth,private http: HttpClient, private router: Router) {}
 
   // Đăng ký người dùng
   signup(data: { name: string; email: string; password: string; phone?: string; address?: string }): Observable<any> {
@@ -35,6 +38,15 @@ export class AuthService {
       }),
       catchError(this.handleError),
     );
+  }
+
+  loginWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(this.auth, provider).then(result => {
+      return result.user.getIdToken().then(token => {
+        return this.http.post(`${API_URL}/firebase-login`, { token }).toPromise();
+      });
+    });
   }
 
   // Đăng xuất

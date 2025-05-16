@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -22,70 +23,69 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class SignupComponent {
   signupForm: FormGroup;
-  showDropdown: boolean = false;
-
   isLoadingSignIn = false;
-
   subscriptions: Subscription[] = [];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private _matSnackBar: MatSnackBar,
+    private authService: AuthService
   ) {
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(11)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(11)]],
-      numberPhone: ['', [Validators.required, Validators.minLength(10)]],
-      name: ['', [Validators.required, Validators.minLength(3)]],
-
-
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      numberPhone: ['', [Validators.required, Validators.pattern(/^[0-9]{10,11}$/)]],
+      name: ['', [Validators.required]],
+      address: ['', [Validators.required, Validators.minLength(5)]], // thêm dòng này
+      // Bạn có thể thêm confirmPassword nếu cần xác thực 2 lần mật khẩu
     });
   }
 
-  ngOnDestroy() {
-    this.subscriptions.forEach((sub) => sub.unsubscribe());
-  }
-  ngOnInit(): void {
-    this.subscriptions.push(
-      // this.store.select('auth', 'loading').subscribe((loading) => {
-      //   this.isLoadingSignIn = loading;
-      // }),
-      // this.store.select('auth', 'idToken').subscribe((val) => {
-      //   if (val != '') {
-      //     this.router.navigate(['/main']).then(() => {
-      //       console.log('tic');
-      //     });
-      //   }
-      // }),
-      // this.store.select('auth', 'error').subscribe((error) => {
-      //   if (error) {
-      //     this._matSnackBar.open(error, 'Đóng', {
-      //       duration: 5000,
-      //     });
-      //   }
-      // }),
-    );
+  ngOnInit(): void {}
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((s) => s.unsubscribe());
   }
 
-  signInWithGoogle() {
-    // this.store.dispatch(AuthActions.signInWithGoogle());
+  signInWithGoogle(): void {
+    // Xử lý Google OAuth nếu có
+    this._matSnackBar.open('Chức năng đang phát triển', 'Đóng', { duration: 3000 });
   }
 
-  signInWithStaticUser() {
-    // this.store.dispatch(
-    //   // AuthActions.signInWithStaticUser({
-    //   //   email: this.loginForm.get('email')?.value,
-    //   //   password: this.loginForm.get('password')?.value,
-    //   // }),
-    // );
+  onSubmit(): void {
+    if (this.signupForm.invalid) {
+      this._matSnackBar.open('Vui lòng điền đúng và đầy đủ thông tin!', 'Đóng', {
+        duration: 3000,
+      });
+      return;
+    }
+
+    const { name, email, password, numberPhone, address } = this.signupForm.value;
+
+    this.isLoadingSignIn = true;
+
+    this.authService.signup({ name, email, password, phone: numberPhone, address }).subscribe({
+      next: () => {
+        this._matSnackBar.open('Đăng ký thành công! Vui lòng đăng nhập.', 'Đóng', {
+          duration: 3000,
+        });
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        this._matSnackBar.open(err?.error?.message || 'Đăng ký thất bại!', 'Đóng', {
+          duration: 4000,
+        });
+        this.isLoadingSignIn = false;
+      },
+      complete: () => {
+        this.isLoadingSignIn = false;
+      },
+    });
   }
 
-  navigate(path: string) {
-
+  navigate(path: string): void {
     this.router.navigate([path]);
-    this.showDropdown = false;
   }
 
 

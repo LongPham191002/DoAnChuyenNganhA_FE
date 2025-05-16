@@ -13,7 +13,7 @@
       <div class="text-grp">
         <h1 class="login-title">Đăng Ký</h1>
       </div>
-      <form [formGroup]="signupForm">
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <div class="btn-grp">
           <div id="signInWithGoogle">
             <button
@@ -55,10 +55,10 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Tên Đăng Nhập</mat-label>
-            <input matInput formControlName="email" placeholder="Email" />
-            @if (signupForm.get("email")?.invalid) {
-              <mat-error>Tên đăng nhập không hợp lệ</mat-error>
+            <mat-label>Địa chỉ</mat-label>
+            <input matInput formControlName="address" placeholder="Địa chỉ" />
+            @if (signupForm.get("address")?.invalid) {
+              <mat-error>Địa chỉ không hợp lệ</mat-error>
             }
           </mat-form-field>
 
@@ -78,23 +78,26 @@
           </mat-form-field>
         </div>
         <div class="btn-submit">
+
+
+          <!-- Nút Đăng Ký -->
           <button
             mat-flat-button
             color="primary"
             class="login-submit"
-            (click)="signInWithStaticUser()"
-            [disabled]="signupForm.invalid"
             type="submit"
+            [disabled]="signupForm.invalid || isLoadingSignIn"
           >
             Đăng Ký
           </button>
+
+          <!-- Nút Hủy -->
           <button
             mat-flat-button
-            color="primary"
+            color="warn"
             class="login-submit"
-            (click)="signInWithStaticUser()"
-            [disabled]="signupForm.invalid"
-            type="submit"
+            type="button"
+            (click)="navigate('/login')"
           >
             Hủy Bỏ
           </button>

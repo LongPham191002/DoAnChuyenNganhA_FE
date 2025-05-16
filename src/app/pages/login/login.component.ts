@@ -117,7 +117,13 @@ export class LoginComponent implements  OnDestroy {
     this.showDropdown = false;
   }
 
-  signInWithGoogle(): void {
-    this._matSnackBar.open('Tính năng đang phát triển', 'Đóng', { duration: 3000 });
+  signInWithGoogle() {
+    this.authService.loginWithGoogle().then((res: any) => {
+      localStorage.setItem('auth-token', res.access_token);
+      console.log('Đăng nhập thành công:', res);
+    }).catch(err => {
+      console.error('Lỗi đăng nhập:', err);
+    });
   }
+
 }

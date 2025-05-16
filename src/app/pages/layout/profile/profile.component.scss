@@ -1,47 +1,178 @@
-.profile-card {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  background-color: #fafafa;
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  height: 980px;
+  margin: 0 auto;
+  padding: 40px 60px;
+  background: #f5f7fb;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 }
 
+// Thẻ chung cho card
+.profile-card,
+.orders-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  }
+}
+
+// Tiêu đề
 .title {
-  text-align: center;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 32px;
   color: #3f51b5;
+  text-align: center;
 }
 
+// Phần profile
 .profile-content {
   display: flex;
   flex-direction: row;
+  gap: 32px;
   align-items: flex-start;
-  gap: 20px;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .avatar img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid #e0e0e0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .info {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    row-gap: 16px;
+    column-gap: 16px;
+    font-size: 16px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      width: 100%;
+    }
+
+    p {
+      margin: 0;
+      display: contents;
+
+      strong {
+        color: #444;
+        align-self: center;
+      }
+
+      span, input {
+        font-size: 16px;
+      }
+
+      input {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        width: 100%;
+        transition: 0.3s;
+        outline: none;
+
+        &:focus {
+          border-color: #3f51b5;
+          box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.15);
+        }
+      }
+    }
+
+    .action-buttons {
+      grid-column: span 2;
+      margin-top: 12px;
+
+      @media (max-width: 768px) {
+        grid-column: span 1;
+        text-align: center;
+      }
+
+      button {
+        margin-right: 12px;
+      }
+    }
+  }
 }
 
-.avatar img {
-  width: 150px;
-  height: 150px;
-  border-radius: 8px;
-  object-fit: cover;
-  border: 2px solid #e0e0e0;
+// Phần đơn hàng
+.orders-card {
+  .orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .order-item {
+      background: #f9fafc;
+      padding: 18px 24px;
+      border-radius: 12px;
+      border: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 15px;
+
+      .order-info {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .status {
+        padding: 4px 14px;
+        border-radius: 20px;
+        font-weight: 600;
+        text-transform: capitalize;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      .pending {
+        background-color: #fff3cd;
+        color: #856404;
+      }
+
+      .completed {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .cancelled {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+    }
+  }
 }
 
-.info {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 16px;
-}
-
+// Loading state
 .loading-card {
-  max-width: 400px;
-  margin: 50px auto;
   text-align: center;
-  padding: 20px;
-  color: #888;
+  padding: 40px;
   font-style: italic;
+  color: #777;
+  background-color: #f0f0f0;
+  border-radius: 16px;
+  font-size: 16px;
 }

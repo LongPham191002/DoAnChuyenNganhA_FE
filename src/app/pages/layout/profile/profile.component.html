@@ -1,21 +1,67 @@
-<mat-card class="profile-card" *ngIf="user">
-  <h2 class="title">Thông tin cá nhân</h2>
-  <div class="profile-content">
-    <div class="avatar">
-      <img
-        [src]="user.image_url ? getImageUrl() : 'assets/images/core-img/default-avatar.png'"
-        alt="Ảnh đại diện"
-      />
-    </div>
-    <div class="info">
-      <p><strong>Tên:</strong> {{ user.name }}</p>
-      <p><strong>Email:</strong> {{ user.email }}</p>
-      <p><strong>SĐT:</strong> {{ user.phone }}</p>
-      <p><strong>Địa chỉ:</strong> {{ user.address }}</p>
-    </div>
-  </div>
-</mat-card>
+<div class="dashboard-container">
 
-<mat-card *ngIf="!user" class="loading-card">
-  <p>Đang tải thông tin người dùng...</p>
-</mat-card>
+  <!-- THÔNG TIN CÁ NHÂN -->
+  <mat-card class="profile-card" *ngIf="user">
+    <h2 class="title">Thông tin cá nhân</h2>
+    <div class="profile-content">
+      <div class="avatar">
+        <img
+          [src]="user.image_url ? getImageUrl() : 'assets/images/core-img/default-avatar.png'"
+          alt="Ảnh đại diện"
+        />
+      </div>
+      <div class="info">
+        <p>
+          <strong>Tên:</strong>
+          <span *ngIf="!isEditing">{{ user.name }}</span>
+          <input *ngIf="isEditing" [(ngModel)]="user.name" />
+        </p>
+        <p>
+          <strong>Email:</strong>
+          <span *ngIf="!isEditing">{{ user.email }}</span>
+          <input *ngIf="isEditing" [(ngModel)]="user.email" />
+        </p>
+        <p>
+          <strong>SĐT:</strong>
+          <span *ngIf="!isEditing">{{ user.phone }}</span>
+          <input *ngIf="isEditing" [(ngModel)]="user.phone" />
+        </p>
+        <p>
+          <strong>Địa chỉ:</strong>
+          <span *ngIf="!isEditing">{{ user.address }}</span>
+          <input *ngIf="isEditing" [(ngModel)]="user.address" />
+        </p>
+
+        <!-- Nút -->
+        <div class="action-buttons">
+          <button *ngIf="!isEditing" mat-button color="primary" (click)="toggleEdit()">Chỉnh sửa</button>
+          <div *ngIf="isEditing">
+            <button mat-raised-button color="primary" (click)="saveChanges()">Lưu</button>
+            <button mat-button (click)="toggleEdit()">Huỷ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- ĐANG TẢI -->
+  <mat-card *ngIf="!user" class="loading-card">
+    <p>Đang tải thông tin người dùng...</p>
+  </mat-card>
+
+  <!-- ĐƠN HÀNG -->
+  <mat-card class="orders-card" *ngIf="orders && orders.length > 0">
+    <h2 class="title">Đơn hàng đã đặt</h2>
+    <div class="orders-list">
+      <div class="order-item" *ngFor="let order of orders">
+        <div><strong>Mã:</strong> {{ order.id }}</div>
+        <div><strong>Ngày:</strong> {{ order.date }}</div>
+        <div><strong>Tổng:</strong> {{ order.total | currency:'VND' }}</div>
+        <div><strong>Trạng thái:</strong>
+          <span class="status" [ngClass]="order.status">{{ order.status }}</span>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+</div>
